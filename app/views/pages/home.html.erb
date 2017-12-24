@@ -1,0 +1,95 @@
+<%= stylesheet_link_tag 'pages' %>
+<div class="container">
+	<%= render 'navbar' %>
+	</br>
+	<div class="row">
+		<div class="col-md-8">
+		    <div style="height: 500px;overflow: auto;">
+				<table class="table table-fixed">
+					<thead class="thead-dark" style="font-size: 12px;">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Kode Barang</th>
+							<th scope="col">Nama Barang</th>
+							<th scope="col">Qty</th>
+							<th scope="col">Subtotal</th> 
+						</tr>
+					</thead>
+					<tbody style="font-size: 12px;">
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>Thornton</td>
+							<td>@fat</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>@twitter</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>@twitter</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>@twitter</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>@twitter</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<h2 class="text-right">Total: Rp 20000</h2>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+		    	<div class="col-sm-6">
+					<label for="sellid">ID Penjualan</label>
+					<input class="form-control form-control-sm" type="text" name="sellid" id="sellid" disabled>
+				</div>
+				<div class="col-sm-6">
+					<label for="dateorder">Tanggal</label>
+					<input class="form-control form-control-sm" type="date" name="dateorder" id="dateorder" disabled>
+				</div> 
+			</div></br>
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="code">Barcode/Kode Barang</label>
+					<input type="text" class="form-control form-control-sm" name="code" id="code">
+				</div>
+			</div></br>
+			<div class="row">
+				<div class="col-sm-6">
+					<a href="#" class="btn btn-primary btn-block">New</a>
+				</div>
+				<div class="col-sm-6">
+					<a href="#" class="btn btn-danger btn-block">Clear</a>
+				</div>
+			</div></br>
+			<div class="row">
+				<div class="col-sm-6">
+					<a href="#" class="btn btn-warning btn-block">Finish</a>
+				</div>
+				<div class="col-sm-6">
+					<a href="#" class="btn btn-success btn-block">Print</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
