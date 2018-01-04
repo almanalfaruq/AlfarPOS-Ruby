@@ -5,14 +5,14 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div class="row">
-		    	<div class="col-sm-6">
+				<div class="col-sm-6">
 					<label for="sellid">ID Penjualan</label>
-					<input class="form-control form-control-sm" type="text" name="sellid" id="sellid" disabled>
+					<input class="form-control form-control-sm" type="text" name="sellid" id="sellid" value="<%= @order_id %>" disabled>
 				</div>
 				<div class="col-sm-6">
 					<label for="dateorder">Tanggal</label>
-					<input class="form-control form-control-sm" type="date" name="dateorder" id="dateorder" disabled>
-				</div> 
+					<input id="date" class="form-control form-control-sm" type="date" name="dateorder" id="dateorder" disabled>
+				</div>
 			</div></br>
 			<div class="row">
 				<div class="col-sm-12">
@@ -24,32 +24,41 @@
 			</div></br>
 			<div class="row">
 				<div class="col-sm-6">
-					<a href="#" class="btn btn-primary btn-block">New</a>
+					<button id="btn-new" type="button" class="btn btn-primary btn-block" data-btn="new" data-toggle="modal" data-target="#modal">
+						New
+					</button>
 				</div>
 				<div class="col-sm-6">
-					<a href="#" class="btn btn-danger btn-block">Clear</a>
+					<button id="btn-clear" type="button" class="btn btn-danger btn-block" data-btn="clear" data-toggle="modal" data-target="#modal">
+						Clear
+					</button>
 				</div>
 			</div></br>
 			<div class="row">
 				<div class="col-sm-6">
-					<a href="#" class="btn btn-warning btn-block">Finish</a>
+					<button id="btn-finish" type="button" class="btn btn-warning btn-block" data-btn="finish" data-toggle="modal" data-target="#modal">
+						Finish
+					</button>
 				</div>
 				<div class="col-sm-6">
-					<a href="#" class="btn btn-success btn-block">Print</a>
+					<button id="btn-print" type="button" class="btn btn-success btn-block" data-btn="print" data-toggle="modal" data-target="#modal">
+						Print
+					</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-8">
 			<h1 id="total" class="text-right">Total: Rp 0</h1></br>
-		    <div style="height: 450px;overflow: auto;">
+			<div style="height: 450px;overflow: auto;">
 				<table id="items" class="table table-fixed">
 					<thead class="thead-dark" style="font-size: 12px;">
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Kode Barang</th>
 							<th scope="col">Nama Barang</th>
+							<th scope="col" hidden>Price</th>
 							<th scope="col">Qty</th>
-							<th scope="col">Subtotal</th> 
+							<th scope="col">Subtotal</th>
 						</tr>
 					</thead>
 					<tbody style="font-size: 12px;">
@@ -58,5 +67,24 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 <%= javascript_include_tag 'pages' %>
