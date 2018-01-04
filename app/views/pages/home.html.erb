@@ -3,66 +3,6 @@
 	<%= render 'navbar' %>
 	</br>
 	<div class="row">
-		<div class="col-md-8">
-			<h1 id="total" class="text-right">Total: Rp 20000</h1></br>
-		    <div style="height: 450px;overflow: auto;">
-				<table class="table table-fixed">
-					<thead class="thead-dark" style="font-size: 12px;">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Kode Barang</th>
-							<th scope="col">Nama Barang</th>
-							<th scope="col">Qty</th>
-							<th scope="col">Subtotal</th> 
-						</tr>
-					</thead>
-					<tbody style="font-size: 12px;">
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-							<td class="subtotal">Rp 500</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-							<td class="subtotal">Rp 500</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-							<td class="subtotal">Rp 500</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-							<td class="subtotal">Rp 500</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-							<td class="subtotal">Rp 500</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-							<td class="subtotal">Rp 500</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
 		<div class="col-md-4">
 			<div class="row">
 		    	<div class="col-sm-6">
@@ -77,7 +17,9 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<label for="code">Barcode/Kode Barang</label>
-					<input type="text" class="form-control form-control-sm" name="code" id="code">
+					<%= form_tag '', id: 'form-code' do %>
+						<%= autocomplete_field_tag 'item', '', autocomplete_item_name_items_path, 'data-auto-focus': true, class: 'form-control form-control-sm' %>
+					<% end %>
 				</div>
 			</div></br>
 			<div class="row">
@@ -95,6 +37,24 @@
 				<div class="col-sm-6">
 					<a href="#" class="btn btn-success btn-block">Print</a>
 				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<h1 id="total" class="text-right">Total: Rp 0</h1></br>
+		    <div style="height: 450px;overflow: auto;">
+				<table id="items" class="table table-fixed">
+					<thead class="thead-dark" style="font-size: 12px;">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Kode Barang</th>
+							<th scope="col">Nama Barang</th>
+							<th scope="col">Qty</th>
+							<th scope="col">Subtotal</th> 
+						</tr>
+					</thead>
+					<tbody style="font-size: 12px;">
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
