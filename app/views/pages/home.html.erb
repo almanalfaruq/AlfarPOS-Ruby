@@ -18,10 +18,18 @@
 				<div class="col-sm-12">
 					<label for="code">Barcode/Kode Barang</label>
 					<%= form_tag '', id: 'form-code' do %>
-						<%= autocomplete_field_tag 'item', '', autocomplete_item_name_items_path, 'data-auto-focus': true, class: 'form-control form-control-sm' %>
+						<%= autocomplete_field_tag 'item', '', autocomplete_item_name_items_path, 'data-auto-focus': true, class: 'form-control form-control-sm', autofocus: true %>
 					<% end %>
 				</div>
 			</div></br>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="alert alert-primary">
+						<h4 class="alert-heading">Shortcut</h4>
+						<p>Ctrl+Panah Kanan: Ganti jumlah barang<br>Ctrl+Enter: Selesai transaksi<br>Ctrl+Delete: Hapus barang terakhir</p>
+					</div>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-sm-6">
 					<button id="btn-new" type="button" class="btn btn-primary btn-block" data-btn="new" data-toggle="modal" data-target="#modal">
@@ -49,22 +57,23 @@
 		</div>
 		<div class="col-md-8">
 			<h1 id="total" class="text-right">Total: Rp 0</h1></br>
-			<div style="height: 450px;overflow: auto;">
-				<table id="items" class="table table-fixed">
-					<thead class="thead-dark" style="font-size: 12px;">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Kode Barang</th>
-							<th scope="col">Nama Barang</th>
-							<th scope="col" hidden>Price</th>
-							<th scope="col">Qty</th>
-							<th scope="col">Subtotal</th>
-						</tr>
-					</thead>
-					<tbody style="font-size: 12px;">
-					</tbody>
-				</table>
-			</div>
+						<div style="height: 450px;overflow: auto;">
+							<table id="items" class="table table-fixed">
+								<thead class="thead-dark" style="font-size: 12px;">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Kode Barang</th>
+										<th scope="col">Nama Barang</th>
+										<th scope="col" hidden>Price</th>
+										<th scope="col">Qty</th>
+										<th scope="col">Subtotal</th>
+										<th scope="col"></th>
+									</tr>
+								</thead>
+								<tbody style="font-size: 12px;">
+								</tbody>
+							</table>
+						</div>
 		</div>
 	</div>
 
