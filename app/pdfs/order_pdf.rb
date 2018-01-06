@@ -11,7 +11,7 @@ class OrderPdf < Prawn::Document
 			body_height = line_items_height
 		end
 		min_height = header_height + body_height 
-		super(page_size: [min_height, 180], page_layout: :landscape, top_margin: 10.0, left_margin: 18.0, right_margin: 2.5, bottom_margin: 7.0)
+		super(page_size: [min_height, 180], page_layout: :landscape, top_margin: 0.0, left_margin: 18.0, right_margin: 2.5, bottom_margin: 7.0)
 		font "Courier"
 		header
 		table_items
