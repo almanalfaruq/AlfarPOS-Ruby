@@ -39,8 +39,9 @@ gem 'roo',  '~> 2.7.0'
 gem "font-awesome-rails"
 gem "font-ionicons-rails"
 gem 'jquery-ui-rails'
-gem 'formtastic', '~> 3.0'
 gem 'rails-jquery-autocomplete'
+gem 'prawn'
+gem 'prawn-table'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

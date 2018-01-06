@@ -23,6 +23,9 @@ plugin/raphael/raphael.min.js
 plugin/morris.js/morris.min.js
 plugin/jquery-slimscroll/jquery.slimscroll.min.js
 plugin/fastclick/fastclick.js
+qz-print/rsvp-3.1.0.min.js
+qz-print/sha-256.min.js
+qz-print/qz-tray.js
 admin.js 
 admin.css 
 pages.coffee

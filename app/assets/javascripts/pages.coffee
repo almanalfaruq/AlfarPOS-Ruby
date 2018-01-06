@@ -7,6 +7,9 @@ total = 0
 itemsCode = []
 itemsQty = []
 tdeditable = null
+print = false
+refresh = false
+pay = 0
 
 # Setting up the date
 setDate = () ->
@@ -70,14 +73,37 @@ rowOptions = () ->
 		e.preventDefault()
 		)
 
+printPdf = (orderId) ->
+	qz.websocket.connect().then(() -> 
+		return qz.printers.find("TM")  
+	).then((printer) ->
+		config = qz.configs.create(printer, { size: {width: 76, height: 297 }, units: 'mm', scaleContent: 'false', rasterize: 'false' })
+		data = [{ type: 'pdf', data: '/orders/' + orderId + '.pdf'}]
+		return qz.print(config, data)
+		).then(() ->
+			if (refresh) 
+				refresh = false
+				window.location.reload()
+			).catch((e) ->
+				console.error(e)
+				)
+
 # Send post method to create the order detail per item
 createOrderDetail = (orderId, items, qty) ->
 	$.post "/order_details/new.json", 
 			order_id: orderId
 			items: items
 			qtys: qty
+			cash: pay	
 			(data, status) ->
-				if (status == "success") then window.location.reload() else alert "Harap refresh halaman"
+				if (status == "success") 
+					if (print)
+						print = false
+						printPdf(orderId)
+					else
+						window.location.reload()
+				else 
+					alert "Harap refresh halaman"
 
 # Get all items code and qty that buyer buy
 getCodesQty = () ->
@@ -92,10 +118,15 @@ getCodesQty = () ->
 finishTranscation = () ->
 	getCodesQty()
 	orderId = $("#sellid").val()
+	cash = $("#cash-payed").val()
 	$.post "/orders/new.json",
 		order_id: orderId 
 		(data, status) ->
-			if (status == "success") then createOrderDetail(orderId, itemsCode, itemsQty) else alert "Harap refresh halaman"
+			if (status == "success") 
+				refresh = true
+				createOrderDetail(orderId, itemsCode, itemsQty) 
+			else 
+				alert "Harap refresh halaman"
 
 # If has enter pressed on barcode text box
 $("#item").keydown((e) ->
@@ -142,12 +173,12 @@ $(".modal").on("show.bs.modal", (e) ->
 			footer = "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Batal</button><button id='clear-order' type='button' class='btn btn-danger'>Hapus transaksi</button>"
 		when "finish"
 			title = "Selesai Transaksi"
-			body = "Apakah transaksi sudah selesai?" 
+			body = "<h1 id='total-modal' class='text-center'></h1><form class='form-group'> <label for='recipient-name' class='col-form-label'>Total Bayar:</label><input type='text' class='form-control' id='cash-payed'></form><label class='col-form-label'>Total Kembali:</label><h4 id='cash-returned' class='text-right'>Rp 0,00</h4>"
 			footer = "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Batal</button> <button id='finish-order' type='button' class='btn btn-warning'>Ya</button> <button id='finish-print' type='button' class='btn btn-success cetak'>Ya dan Cetak</button>"
 		when "print"
 			title = "Cetak Transaksi"
 			body = "Apakah transaksi akan dicetak?" 
-			footer = "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Batal</button> <button type='button' class='btn btn-success cetak'>Cetak</button>"
+			footer = "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Batal</button> <button type='button' class='btn btn-success cetak' id='btn-cetak'>Cetak</button>"
 		else
 			console.log "Nothing clicked"
 	$(".modal-title").html(title)
@@ -157,6 +188,30 @@ $(".modal").on("show.bs.modal", (e) ->
 
 # What going to do when modal was shown
 $(".modal").on("shown.bs.modal", () ->
+	returned = Number($("#cash-payed").val()) - total
+	if (returned <= 0)
+		$("#finish-order").prop("disabled", true)
+		$("#finish-print").prop("disabled", true)
+	$("#total-modal").text("Rp " + total + ",00")
+	$("#cash-payed").focus()
+	$("#cash-payed").keyup((e) ->
+		returned = Number($(this).val()) - total
+		console.log(returned)
+		if ($(this).val() == 0 || $(this).val() == "" || returned < 0 || returned == null || total == 0)
+			$("#finish-order").prop("disabled", true)
+			$("#finish-print").prop("disabled", true)
+		else if (returned > 0)
+			$("#finish-order").prop("disabled", false)
+			$("#finish-print").prop("disabled", false)
+		$("#cash-returned").text("Rp " + returned + ",00")
+		)
+	$("#cash-payed").keydown((e) ->
+		if (e.which == 13 && returned >= 0)
+			pay = $(this).val()
+			$("#finish-print").click()
+			$(".modal").modal("hide")
+			e.preventDefault()
+		)
 	# Refresh if new order was clicked
 	$("#new-order").click(() ->
 		window.location.reload()
@@ -171,12 +226,12 @@ $(".modal").on("shown.bs.modal", () ->
 		finishTranscation()
 		)
 	$("#finish-print").click(() ->
+		print = true
 		finishTranscation()
+		$(".modal").modal("hide") 
 		)
-	# Focus on print button
-	$(".cetak").focus()
-	$(".cetak").click(() ->
-		$(".modal").modal("hide")
+	$("#btn-cetak").click(() ->
+		printPdf("3908D387-6383-4920-800A-FB873ABFAEC0")
 		)
 	)
 

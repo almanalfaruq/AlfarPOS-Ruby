@@ -2,6 +2,15 @@ class OrdersController < ApplicationController
 
 	def show
 		@order = Order.find_by_code(params[:code])
+		@order_details = OrderDetail.where(order: @order)
+		respond_to do |f|
+			f.json { render json: @order }
+			f.pdf do
+				pdf = OrderPdf.new(@order, @order_details) 
+				send_data pdf.render, filename: "receipt.pdf", type: "application/pdf", disposition: "inline"
+			end
+			f.html { redirect_to root_path }
+		end
 	end
 
 	def new
