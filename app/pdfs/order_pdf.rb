@@ -4,14 +4,7 @@ class OrderPdf < Prawn::Document
 	def initialize(order, order_details)
 		@order = order
 		@order_details = order_details
-		line_items_height = 14*@order_details.size + 56
-		header_height = 170
-		body_height = 20 + 56
-		if line_items_height > body_height
-			body_height = line_items_height
-		end
-		min_height = header_height + body_height 
-		super(page_size: [min_height, 180], page_layout: :landscape, top_margin: 0.0, left_margin: 18.0, right_margin: 2.5, bottom_margin: 7.0)
+		super(page_size: [841, 180], page_layout: :landscape, top_margin: 0.0, left_margin: 18.0, right_margin: 2.5, bottom_margin: 7.0)
 		font "Courier"
 		header
 		table_items
