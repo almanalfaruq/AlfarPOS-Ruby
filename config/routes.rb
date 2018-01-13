@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 	devise_for :users
 	resources :items do
 		get :autocomplete_item_name, on: :collection
+		post :import, on: :collection
 	end
 	get 'orders/:code', to: 'orders#show', as: 'order'
 	post 'orders/new', to: 'orders#new'
