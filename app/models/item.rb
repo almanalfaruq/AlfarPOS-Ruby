@@ -89,7 +89,7 @@ class Item < ApplicationRecord
     if cell.value.nil?
       'Pcs'
     else
-      cell.value
+	  cell.value.to_s.titelize
     end
   end
 end
