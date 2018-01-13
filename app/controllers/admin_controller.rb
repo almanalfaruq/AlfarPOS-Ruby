@@ -16,8 +16,13 @@ class AdminController < ApplicationController
     @users = User.all
   end
 
+  def order
+	@orders = Order.all
+	@order_details = OrderDetail.all
+  end
+
   def history
-    @orders = Order.all
+    @histories = History.all
   end
 
   private
