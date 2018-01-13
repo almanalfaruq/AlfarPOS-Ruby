@@ -17,3 +17,8 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore all vim temporary files
+*~
+*.swp
+*.swo
