@@ -34,18 +34,6 @@
 					<%= form_tag import_items_path, class: 'form-horizontal', multipart: true do %>
 						<div class="box-body">
 							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-								<div class="col-sm-10">
-									<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-								<div class="col-sm-10">
-									<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-								</div>
-							</div>
-							<div class="form-group">
 								<label for="exampleInputFile" class="col-sm-2 control-label">File input</label>
 								<div class="col-sm-10">
 									<%= file_field_tag :file %>
@@ -55,7 +43,7 @@
 						</div>
 						<!-- /.box-body -->
 						<div class="box-footer">
-							<a href="../../dashboard.html" class="btn btn-default">Cancel</a>
+							<%= link_to 'Cancel', admin_dashboard_path, class: 'btn btn-default' %>
 							<!-- <button type="submit" class="btn btn-default">Cancel</button> -->
 							<%= submit_tag "Restore", class: 'btn btn-info pull-right' %>
 						</div>
