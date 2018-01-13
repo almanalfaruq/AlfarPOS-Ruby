@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap";
+@import "font-awesome";
+
 .table-fixed {
 	width: 100%;
 	background-color: #f3f3f3;

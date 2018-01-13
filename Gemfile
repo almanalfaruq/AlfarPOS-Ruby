@@ -37,6 +37,11 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'jquery-rails'
 gem 'roo',  '~> 2.7.0'
 gem "font-awesome-rails"
+gem "font-ionicons-rails"
+gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
+gem 'prawn'
+gem 'prawn-table'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

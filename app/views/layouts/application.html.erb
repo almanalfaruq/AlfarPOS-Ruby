@@ -5,10 +5,13 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<% if devise_controller? %> 
+		<%= stylesheet_link_tag 'pages' %>
+	<% end %>
   </head>
 
-  <body>
+  <body data-turbolinks="false">
     <%= yield %>
   </body>
 </html>
