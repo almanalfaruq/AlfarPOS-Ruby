@@ -64,14 +64,14 @@ rowOptions = () ->
 			save($(this))
 			$("#item").focus()
 			return false
-	)
+		)
 	# Delete row if 'x' was clicked
 	$("a.del-row").click((e) ->
 		$(this).closest("tr").remove()
 		addTotal()
 		tdeditable = $("#items tbody tr:last-child td.qty") # Get the latest table row child
 		e.preventDefault()
-	)
+		)
 
 printPdf = (orderId) ->
 	qz.websocket.connect().then(() ->
@@ -109,10 +109,10 @@ createOrderDetail = (orderId, items, qty) ->
 getCodesQty = () ->
 	$("td.code").each((i, obj) ->
 		itemsCode.push($(this).text())
-	)
+		)
 	$("td.qty").each((i, obj) ->
 		itemsQty.push($(this).text())
-	)
+		)
 
 # Send post method to create the order first then invoke create order detail method
 finishTranscation = () ->
@@ -141,18 +141,18 @@ $("#item").keydown((e) ->
 		tdeditable.closest("tr").remove()
 		addTotal()
 	tdeditable = $("#items tbody tr:last-child td.qty") # Get the latest table row child
-)
+	)
 
 # Prevent default enter on autocomplete form
 $("#form-code").submit((e) ->
 	e.preventDefault()
-)
+	)
 
 # Binding selected item on rails autocomplete
 $("#item").bind('railsAutocomplete.select', (e,d) ->
 	code = d.item.code # get text from text box
 	insertToTable(code)
-)
+	)
 
 # What to do when modal is going to show
 $(".modal").on("show.bs.modal", (e) ->
@@ -184,7 +184,7 @@ $(".modal").on("show.bs.modal", (e) ->
 	$(".modal-title").html(title)
 	$(".modal-body").html(body)
 	$(".modal-footer").html(footer)
-)
+	)
 
 # What going to do when modal was shown
 $(".modal").on("shown.bs.modal", () ->
@@ -204,34 +204,34 @@ $(".modal").on("shown.bs.modal", () ->
 			$("#finish-order").prop("disabled", false)
 			$("#finish-print").prop("disabled", false)
 		$("#cash-returned").text("Rp " + returned + ",00")
-	)
+		)
 	$("#cash-payed").keydown((e) ->
 		if (e.which == 13 && returned >= 0)
 			pay = $(this).val()
 			$("#finish-print").click()
 			$(".modal").modal("hide")
 			e.preventDefault()
-	)
+		)
 	# Refresh if new order was clicked
 	$("#new-order").click(() ->
 		window.location.reload()
-	)
+		)
 	# Clear the table but not refreshing the page
 	$("#clear-order").click(() ->
 		$("table tbody").empty()
 		$(".modal").modal("hide")
 		addTotal()
-	)
+		)
 	$("#finish-order").click(() ->
 		finishTranscation()
-	)
+		)
 	$("#finish-print").click(() ->
 		print = true
 		finishTranscation()
 		$(".modal").modal("hide")
-	)
+		)
 	$("#btn-cetak").click(() ->
 		printPdf("3908D387-6383-4920-800A-FB873ABFAEC0")
+		)
 	)
-)
 

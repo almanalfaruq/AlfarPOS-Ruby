@@ -25,8 +25,10 @@ class ItemsController < ApplicationController
 			  error: e.message
           }, status: :unprocessable_entity
 		end
+		format.html { redirect_to admin_item_path, notice: "Cannot create new item with error: #{e.message}"}
 	  end
 	  format.json { render json: @item, status: :created }
+	  format.html { redirect_to admin_item_path, notice: "New item was created"}
     end
   end
 
@@ -36,6 +38,41 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.json { render json: @item }
     end
+  end
+
+  def update
+	@item = Item.find(params[:id])
+	
+	respond_to do |format|
+	  format.json do
+		begin
+		  @item.assign_attributes(item_params)
+		  @item.save
+		rescue StandardError => e
+		  render json: {
+		  	error: e.message
+		  }, status: :unprocessable_entity
+		end
+		render json: @item, status: :accepted
+	  end
+	end
+  end
+		
+  def destroy
+	@item = Item.find(params[:id])
+
+	respond_to do |format|
+	  begin
+		@item.destroy
+	  rescue StandardError => e
+		format.json do
+		  render json: {
+		  	error: e.message
+		  }, status: :payment_required
+	    end
+	  end
+	  format.json { render json: @item, status: :ok }
+	end
   end
 
   def import

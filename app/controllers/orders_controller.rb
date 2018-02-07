@@ -18,10 +18,17 @@ class OrdersController < ApplicationController
     @order = Order.new(code: @order_id, user: @user)
     respond_to do |f|
       if @order.save
+		@history = History.create(user: current_user, activity: 'Membuat transaksi')
         f.json { render json: @order, status: :created }
       else
         f.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def delete
+	@order = Order.find_by_code(params[:code])
+	@order.destroy
+	@history.create(user: current_user, activity: 'Menghapus transaksi')
   end
 end

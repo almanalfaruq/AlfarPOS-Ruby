@@ -111,67 +111,116 @@
 			</div>
 		</div>
 		<!-- sidebar menu: : style can be found in sidebar.less -->
-		<ul class="sidebar-menu" data-widget="tree">
-			<li class="header">MAIN NAVIGATION</li>
-			<li class="<%= active_class(admin_dashboard_path) %>">
-				<%= link_to admin_dashboard_path do %>
-					<%= fa_icon 'dashboard', text: 'Dashboard' %>
-				<% end %>
-			</li>
-			<li class="<%= active_class(admin_restore_path) %> treeview">
-				<a href="#">
-					<i class="fa fa-files-o"></i>
-					<span>Backup and Restore</span>
-					<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-				<ul class="treeview-menu">
-					<li>
-						<a href="pages/layout/top-nav.html">
-							<i class="fa fa-download"></i> Backup Items</a>
-					</li>
-					<li class="<%= active_class(admin_restore_path) %>">
-						<%= link_to admin_restore_path do %>
-							<%= fa_icon "upload", text: "Restore Items" %>
-						<% end %>
-					</li>
-				</ul>
-			</li>
-			<li class="treeview">
-				<a href="#">
-					<i class="fa fa-th"></i>
-					<span>Database</span>
-					<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-				<ul class="treeview-menu">
-					<li>
-						<%= link_to admin_item_path do %>
-							<%= fa_icon "circle-o", text: "Items" %>
-						<% end %>
-					</li>
-					<li>
-						<%= link_to admin_user_path do %>
-							<%= fa_icon "circle-o", text: "Users" %>
-						<% end %>
-					</li>
-					<li>
-						<%= link_to admin_history_path do %>
-							<%= fa_icon "circle-o", text: "History" %>
-						<% end %>
-					</li>
-				</ul>
-			</li>
-			<li class="header">REPORT</li>
-			<li>
-				<a href="pages/widgets.html">
-					<i class="fa fa-download"></i>
-					<span>Download Report</span>
-				</a>
-			</li>
-		</ul>
+		<% if current_user.has_role? :admin %>
+			<ul class="sidebar-menu" data-widget="tree">
+				<li class="header">MAIN NAVIGATION</li>
+				<li class="<%= active_class(admin_dashboard_path) %>">
+					<a href="<%= admin_dashboard_path %>">
+						<i class="fa fa-dashboard"></i>
+						<span>Dashboard</span>
+					</a>
+				</li>
+				<li class="<%= active_class(admin_restore_path) %> treeview">
+					<a href="#">
+						<i class="fa fa-files-o"></i>
+						<span>Backup and Restore</span>
+						<span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<%= link_to admin_backup_path(format: :xlsx) do %>
+								<i class="fa fa-download"></i> Backup Items
+							<% end %>
+						</li>
+						<li class="<%= active_class(admin_restore_path) %>">
+							<%= link_to admin_restore_path do %>
+								<%= fa_icon "upload", text: "Restore Items" %>
+							<% end %>
+						</li>
+					</ul>
+				</li>
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-th"></i>
+						<span>Database</span>
+						<span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<%= link_to admin_item_path do %>
+								<%= fa_icon "circle-o", text: "Items" %>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_user_path do %>
+								<%= fa_icon "circle-o", text: "Users" %>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_order_path do %>
+								<%= fa_icon "circle-o", text: "Order" %>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to admin_history_path do %>
+								<%= fa_icon "circle-o", text: "History" %>
+							<% end %>
+						</li>
+					</ul>
+				</li>
+				<li class="header">REPORT</li>
+				<li>
+					<a href="pages/widgets.html">
+						<i class="fa fa-download"></i>
+						<span>Download Report</span>
+					</a>
+				</li>
+			</ul>
+		<% elsif current_user.has_role? :manager %>
+			<ul class="sidebar-menu" data-widget="tree">
+				<li class="header">MAIN NAVIGATION</li>
+				<li class="<%= active_class(admin_restore_path) %> treeview">
+					<a href="#">
+						<i class="fa fa-files-o"></i>
+						<span>Backup and Restore</span>
+						<span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a href="pages/layout/top-nav.html">
+								<i class="fa fa-download"></i> Backup Items</a>
+						</li>
+						<li class="<%= active_class(admin_restore_path) %>">
+							<%= link_to admin_restore_path do %>
+								<%= fa_icon "upload", text: "Restore Items" %>
+							<% end %>
+						</li>
+					</ul>
+				</li>
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-th"></i>
+						<span>Database</span>
+						<span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<%= link_to admin_item_path do %>
+								<%= fa_icon "circle-o", text: "Items" %>
+							<% end %>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		<% end %>
 	</section>
 	<!-- /.sidebar -->
 </aside>

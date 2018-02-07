@@ -1,0 +1,8 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Data Barang AlfarPOS") do |sheet|
+  sheet.add_row ["Barcode", "Nama Barang", "Harga Jual", "Stok", "Jenis Barang", "Harga Beli", "Satuan"]
+  @items.each do |i| 
+    sheet.add_row [i.code, i.name, i.price, i.qty, i.category, i.buy_price, i.unit]
+  end
+end

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 	get 'admin/restore' 
 	get 'admin/item'
 	get 'admin/user'
+	get 'admin/order'
 	get 'admin/history'
+	get 'admin/backup'
 	root 'pages#home'
 	devise_for :users
 	resources :items do

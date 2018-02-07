@@ -42,6 +42,8 @@ gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem 'prawn'
 gem 'prawn-table'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'
+gem 'axlsx_rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -7,10 +7,6 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav navbar-right">
@@ -22,6 +18,10 @@
 					<% if current_user.has_role? :admin %>
 						<%= link_to admin_dashboard_path, class: 'dropdown-item' do %>
 							<%= fa_icon 'dashboard', text: 'Dashboard' %>
+						<% end %>
+					<% elsif current_user.has_role? :manager %>
+						<%= link_to admin_item_path, class: 'dropdown-item' do %>
+							<%= fa_icon 'dashboard', text: 'Item' %>
 						<% end %>
 					<% else %>
 						<%= link_to edit_user_registration_path, class: 'dropdown-item' do %>

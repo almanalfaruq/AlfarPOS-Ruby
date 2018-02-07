@@ -19,6 +19,9 @@ plugin/morris.js/morris.scss
 plugin/datatables.net-bs/css/dataTables.bootstrap.min.css
 admin/adminlte.min.js
 admin/pages/dashboard.js
+admin/pages/item.js
+admin/pages/user.js
+admin/pages/history.js
 admin/demo.js
 plugin/datatables.net/js/jquery.dataTables.min.js
 plugin/datatables.net-bs/js/dataTables.bootstrap.min.js

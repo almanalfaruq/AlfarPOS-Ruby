@@ -12,6 +12,9 @@ user.add_role :admin
 user = User.create(name: "Cashier", username: "cashier", phone: "081225812599", no_ktp: "918298128781", email: "cashier@tokoalfar.com", password: "cashier123", password_confirmation: "cashier123")
 user.add_role :cashier
 
-item = Item.create(code: "123", name: "Sikat Gigi Formula", price: "11000", qty: "10", unit: "Pcs")
-item = Item.create(code: "321", name: "Pasta Gigi Formula", price: "8000", qty: "10", unit: "Pcs")
-item = Item.create(code: "111", name: "Sabun Lifebuoy", price: "2500", qty: "10", unit: "Pcs")
+user = User.create(name: "Manager", username: "manager", phone: "081225812598", no_ktp: "213129829182391", email: "manager@tokoalfar.com", password: "manager09876", password_confirmation: "manager09876")
+user.add_role :manager
+
+#item = Item.create(code: "123", name: "Sikat Gigi Formula", price: "11000", qty: "10", unit: "Pcs")
+#item = Item.create(code: "321", name: "Pasta Gigi Formula", price: "8000", qty: "10", unit: "Pcs")
+#item = Item.create(code: "111", name: "Sabun Lifebuoy", price: "2500", qty: "10", unit: "Pcs")

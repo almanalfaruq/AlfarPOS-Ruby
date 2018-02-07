@@ -8,6 +8,7 @@
 		<%= render 'header' %>
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
+			<%= flash_messages %>
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
@@ -15,7 +16,7 @@
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="#">
+						<a href="<%= root_path %>">
 							<i class="fa fa-dashboard"></i> Home</a>
 					</li>
 					<li>Database</li>
@@ -29,6 +30,7 @@
 				<div class="box box-info">
 					<div class="box-header">
 						<h3 class="box-title">Data Table With Full Features</h3>
+						<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-new-item" >Add Item</button>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -42,18 +44,20 @@
 									<th>Jumlah</th>
 									<th>Unit</th>
 									<th>Kategori</th>
+									<th>Hapus</th>
 								</tr>
 							</thead>
 							<tbody>
 								<% @items.each do |i| %>
 									<tr id="<%= i.id %>">
-										<td><%= i.code %></td>
-										<td><%= i.name %></td>
-										<td><%= number_to_currency(i.price, unit: 'Rp', separator: ',', delimiter: '.', format: '%u %n') %></td>
-										<td><%= number_to_currency(i.buy_price, unit: 'Rp', separator: ',', delimiter: '.', format: '%u %n') %></td>
-										<td><%= i.qty %></td>
-										<td><%= i.unit %></td>
-										<td><%= i.category %></td>
+										<td class="code" contenteditable><%= i.code %></td>
+										<td class="name" contenteditable><%= i.name %></td>
+										<td class="price" contenteditable><%= number_to_currency(i.price, unit: 'Rp', separator: ',', delimiter: '.', format: '%u %n') %></td>
+										<td class="buy-price" contenteditable><%= number_to_currency(i.buy_price, unit: 'Rp', separator: ',', delimiter: '.', format: '%u %n') %></td>
+										<td class="qty" contenteditable><%= i.qty %></td>
+										<td class="unit" contenteditable><%= i.unit %></td>
+										<td class="category" contenteditable><%= i.category %></td>
+										<td class="text-center"><a href="#" class="delete" style="color:red;"><span class="fa fa-close"></span></a></td>
 									</tr>
 								<% end %>
 							</tbody>
@@ -66,10 +70,12 @@
 									<th>Jumlah</th>
 									<th>Unit</th>
 									<th>Kategori</th>
+									<th>Hapus</th>
 								</tr>
 							</tfoot>
 						</table>
 					</div>
+
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
@@ -289,6 +295,59 @@
 	  immediately after the control sidebar -->
 	  <div class="control-sidebar-bg"></div>
 	</div>
+	<div class="modal fade in" id="modal-new-item" tabindex="-1" role="dialog" aria-labelledby="modal-new-item-label">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modal-new-item-label">New Item</h4>
+				</div>
+				<div class="modal-body">
+					<%= form_for @item, url: items_path do |f| %>
+						<div class="form-group">
+							<%= f.label :code, class: 'control-label' %>
+							<%= f.text_field :code, class: 'form-control', placeholder: '209183921112' %>
+							<p class="text-muted">Masukkan kode barang (dapat menggunakan scanner)</p>
+						</div>
+						<div class="form-group">
+							<%= f.label :name, class: 'control-label' %>
+							<%= f.text_field :name, class: 'form-control', placeholder: 'Vitacimin Jeruk' %>
+							<p class="text-muted">Masukkan nama barang dengan detail (contoh: Vitacimin Jeruk)</p>
+						</div>
+						<div class="form-group">
+							<%= f.label :price, class: 'control-label' %>
+							<%= f.text_field :price, class: 'form-control', placeholder: '13000' %>
+							<p class="text-muted">Masukkan harga jual barang (contoh: 13000)</p>
+						</div>
+						<div class="form-group">
+							<%= f.label :buy_price, class: 'control-label' %>
+							<%= f.text_field :buy_price, class: 'form-control', placeholder: '13000' %>
+							<p class="text-muted">Masukkan harga beli barang (contoh: 13000)</p>
+						</div>
+						<div class="form-group">
+							<%= f.label :qty, class: 'control-label' %>
+							<%= f.number_field :qty, in: 1.0..1000.0, step: 1.0, class: 'form-control', placeholder: '1' %>
+							<p class="text-muted">Masukkan jumlah barang (contoh: 10)</p>
+						</div>
+						<div class="form-group">
+							<%= f.label :unit, class: 'control-label' %>
+							<%= f.text_field :unit, class: 'form-control', placeholder: 'Pcs' %>
+							<p class="text-muted">Masukkan satuan barang (contoh: Pcs)</p>
+						</div>
+						<div class="form-group">
+							<%= f.label :category, class: 'control-label' %>
+							<%= f.text_field :category, class: 'form-control', placeholder: 'Obat' %>
+							<p class="text-muted">Masukkan kategori barang (contoh: Obat)</p>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<%= f.submit "Add item", class: 'btn btn-primary' %>
+				</div>
+			<% end %>
+			</div>
+		</div>
+	</div>
 	<!-- ./wrapper -->
 	<!-- DataTables -->
 	<%= javascript_include_tag 'plugin/datatables.net/js/jquery.dataTables.min.js' %>
@@ -301,9 +360,5 @@
 	<%= javascript_include_tag 'admin/adminlte.min' %>
 	<!-- AdminLTE for demo purposes -->
 	<%= javascript_include_tag 'admin/demo' %>
-	<script>
-$(function () {
-	$('#tableitems').DataTable()
-})
-	</script>
+	<%= javascript_include_tag 'admin/pages/item' %>
 </body>
